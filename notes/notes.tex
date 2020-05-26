@@ -1,0 +1,74 @@
+
+\documentclass[a4paper,12pt,oneside]{book}
+
+\usepackage[english]{babel}
+\setlength{\parindent}{2em}
+\usepackage{enumitem}
+
+\usepackage{amsmath}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+
+\usepackage{wrapfig}
+\usepackage{graphicx}
+\graphicspath{ {./img/}, {/home/zdrnja/Documents/rl_files/notes/img/} }
+
+\usepackage{algorithm2e}
+\usepackage{algorithmic}
+\usepackage{mdframed}
+\usepackage{eucal}
+\usepackage{amssymb}
+\usepackage{index}
+\usepackage[linkcolor=black,colorlinks=true]{hyperref}
+\usepackage{hyphenat}% [none]{hyphenat}
+\usepackage{longtable}
+\usepackage{multicol}
+
+% custom environments
+\input{custom.tex}
+
+\makeindex
+
+\begin{document}
+\tableofcontents
+
+\newpage
+\section{Definitions}
+\input{definitions.tex}
+
+\chapter{Introduction}
+\label{ch:intro}
+\input{chapters/intro.tex}
+
+\part{Tabular Solution Methods}
+\label{part:tabular_solution_methods}
+\chapter{Multi-armed Bandits}
+\label{ch:multi_armed_bandits}
+\input{chapters/multi_armed_bandits.tex}
+
+\chapter{Finite Markov Decision Processes}
+\label{ch:finite_mdps}
+\input{chapters/finite_mdps.tex}
+
+\chapter{Dynamic Programming}
+\label{ch:dp}
+\input{chapters/dynamic_programming.tex}
+
+\chapter{Monte Carlo (MC) Methods}
+\label{ch:mcm}
+\input{chapters/monte_carlo_methods.tex}
+
+\chapter{Temporal-Difference Learning}
+\label{ch:temporal_difference_learning}
+\input{chapters/temporal_difference_learning.tex}
+
+\chapter{$n$-step Bootstrapping}
+\label{ch:n_step_bootstrapping}
+\input{chapters/n_step_bootstrapping.tex}
+
+\chapter{Planning and Learning with Tabular Methods}
+\label{ch:planning_and_learning_with_tabular_methods}
+\input{chapters/planning_and_learning_with_tabular_methods.tex}
+
+
+\end{document}

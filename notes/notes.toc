@@ -1,0 +1,69 @@
+\babel@toc {english}{}
+\contentsline {section}{\numberline {0.1}Definitions}{4}{section.0.1}
+\contentsline {chapter}{\numberline {1}Introduction}{5}{chapter.1}
+\contentsline {section}{\numberline {1.1}Basic Elements}{5}{section.1.1}
+\contentsline {section}{\numberline {1.2}Summary}{5}{section.1.2}
+\contentsline {part}{I\hspace {1em}Tabular Solution Methods}{7}{part.1}
+\contentsline {chapter}{\numberline {2}Multi-armed Bandits}{8}{chapter.2}
+\contentsline {section}{\numberline {2.1}k-armed Bandit Problem}{8}{section.2.1}
+\contentsline {section}{\numberline {2.2}Action-value Methods}{8}{section.2.2}
+\contentsline {section}{\numberline {2.3}The 10-armed Testbed}{8}{section.2.3}
+\contentsline {section}{\numberline {2.4}Incremental Implementation}{8}{section.2.4}
+\contentsline {section}{\numberline {2.5}Tracking a Nonstationary Problem}{9}{section.2.5}
+\contentsline {section}{\numberline {2.6}Optimistic Initial Values}{9}{section.2.6}
+\contentsline {section}{\numberline {2.7}Upper-Confidence-Bound (UCB) Action Selection}{10}{section.2.7}
+\contentsline {section}{\numberline {2.8}Gradient Bandit Algorithms}{10}{section.2.8}
+\contentsline {section}{\numberline {2.9}Associative Search (Contextual Bandits)}{11}{section.2.9}
+\contentsline {section}{\numberline {2.10}Summary}{11}{section.2.10}
+\contentsline {chapter}{\numberline {3}Finite Markov Decision Processes}{13}{chapter.3}
+\contentsline {section}{\numberline {3.1}The Agent-Environment Interface}{13}{section.3.1}
+\contentsline {section}{\numberline {3.2}Goals and Rewards}{14}{section.3.2}
+\contentsline {section}{\numberline {3.3}Returns and Episodes}{14}{section.3.3}
+\contentsline {section}{\numberline {3.4}Unified Notation for Episodic and Continuing Tasks}{15}{section.3.4}
+\contentsline {section}{\numberline {3.5}Policies and Value Functions}{15}{section.3.5}
+\contentsline {section}{\numberline {3.6}Optimal Policies and Optimal Value Functions}{19}{section.3.6}
+\contentsline {section}{\numberline {3.7}Optimality and Approximation}{20}{section.3.7}
+\contentsline {section}{\numberline {3.8}Summary}{20}{section.3.8}
+\contentsline {chapter}{\numberline {4}Dynamic Programming}{23}{chapter.4}
+\contentsline {section}{\numberline {4.1}Policy Evaluation (Prediction)}{23}{section.4.1}
+\contentsline {section}{\numberline {4.2}Policy Improvement}{23}{section.4.2}
+\contentsline {section}{\numberline {4.3}Policy Iteration}{24}{section.4.3}
+\contentsline {section}{\numberline {4.4}Value Iteration}{24}{section.4.4}
+\contentsline {section}{\numberline {4.5}Asynchronous Dynamic Programming}{25}{section.4.5}
+\contentsline {section}{\numberline {4.6}Generalized Policy Iteration (GPI)}{25}{section.4.6}
+\contentsline {section}{\numberline {4.7}Efficiency of Dynamic Programming}{26}{section.4.7}
+\contentsline {section}{\numberline {4.8}Summary}{26}{section.4.8}
+\contentsline {chapter}{\numberline {5}Monte Carlo (MC) Methods}{28}{chapter.5}
+\contentsline {section}{\numberline {5.1}Monte Carlo Prediction}{28}{section.5.1}
+\contentsline {section}{\numberline {5.2}Monte Carlo Estimation of Action Values}{29}{section.5.2}
+\contentsline {section}{\numberline {5.3}Monte Carlo Control}{29}{section.5.3}
+\contentsline {section}{\numberline {5.4}Monte Carlo Control without Exploring Starts}{29}{section.5.4}
+\contentsline {section}{\numberline {5.5}Off-policy Prediction via Importance\newline Sampling}{30}{section.5.5}
+\contentsline {section}{\numberline {5.6}Incremental Implementation}{31}{section.5.6}
+\contentsline {section}{\numberline {5.7}Off-policy Monte Carlo Control}{32}{section.5.7}
+\contentsline {section}{\numberline {5.8}*Discounting-aware Importance Sampling}{32}{section.5.8}
+\contentsline {section}{\numberline {5.9}*Per-decision Importance Sampling}{33}{section.5.9}
+\contentsline {section}{\numberline {5.10}Summary}{33}{section.5.10}
+\contentsline {chapter}{\numberline {6}Temporal-Difference Learning}{36}{chapter.6}
+\contentsline {section}{\numberline {6.1}TD Prediction}{36}{section.6.1}
+\contentsline {section}{\numberline {6.2}Advantages of TD Prediction Methods}{37}{section.6.2}
+\contentsline {section}{\numberline {6.3}Optimality of TD(0)}{37}{section.6.3}
+\contentsline {section}{\numberline {6.4}Sarsa: On-policy TD Control}{38}{section.6.4}
+\contentsline {section}{\numberline {6.5}Q-Learning: Off-policy TD Control}{38}{section.6.5}
+\contentsline {section}{\numberline {6.6}Expected SARSA}{39}{section.6.6}
+\contentsline {section}{\numberline {6.7}Maximization Bias and Double Learning}{39}{section.6.7}
+\contentsline {section}{\numberline {6.8}Games, Afterstates, and Other Special Cases}{40}{section.6.8}
+\contentsline {section}{\numberline {6.9}Summary}{40}{section.6.9}
+\contentsline {chapter}{\numberline {7}$n$-step Bootstrapping}{43}{chapter.7}
+\contentsline {section}{\numberline {7.1}$n$-step TD Prediction}{43}{section.7.1}
+\contentsline {section}{\numberline {7.2}$n$-step Sarsa}{44}{section.7.2}
+\contentsline {section}{\numberline {7.3}$n$-step Off-policy Learning}{45}{section.7.3}
+\contentsline {section}{\numberline {7.4}*Per-decision Methods with Control Variates}{46}{section.7.4}
+\contentsline {section}{\numberline {7.5}Off-policy Learning Without Importance Sampling: The $n$-step Tree Backup Algorithm}{47}{section.7.5}
+\contentsline {section}{\numberline {7.6}*A Unifying Algorithm: $n$-step $Q(\sigma )$}{49}{section.7.6}
+\contentsline {section}{\numberline {7.7}Summary}{50}{section.7.7}
+\contentsline {chapter}{\numberline {8}Planning and Learning with Tabular Methods}{52}{chapter.8}
+\contentsline {section}{\numberline {8.1}Models and Planning}{52}{section.8.1}
+\contentsline {section}{\numberline {8.2}Dyna: Integrated Planning, Acting, and Learning}{53}{section.8.2}
+\contentsline {section}{\numberline {8.3}When the Model Is Wrong}{55}{section.8.3}
+\contentsline {section}{\numberline {8.4}Prioritized Sweeping}{55}{section.8.4}

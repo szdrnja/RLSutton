@@ -1,0 +1,39 @@
+RL is the optimal control of incompletely-known \hyperref[def:mdp]{Markov decision process}.
+
+\section{Basic Elements}
+\begin{itemize}
+    \item{Policy} - mapping from state to action built and adjusted through learning.
+    \item{Reward} - what the environment returns to the agent based on the current state and the action taken.
+        Essentially tells the agent how desireable the current env state is.
+    \item{Value function} - similar to the reward function, but rather than immediate, it specifies what is good in the long run.
+        Value of a state is the total reward an agent can expect starting from that state.
+        The reward is a predecessor to value and without it value would not exist.
+        Although this is the case, in RL we focus on maximizing value, as it looks into long-term reward maximization.
+        The reward comes from the environment, but the value is approximated by the agent and its experience with the env.
+        The estimation and constant updating of the value function is the core of RL.
+    \item{Environment model} - essentially models a given env and provides an interface to it that the agent uses to learn.
+\end{itemize}
+
+\section{Summary}
+\label{sec:intro-summary}
+Reinforcement learning is a computational approach to understanding and automating
+goal-directed learning and decision making.
+It is distinguished from other computational approaches by its emphasis on learning by an
+agent from direct interaction with its environment, without requiring exemplary supervision
+or complete models of the environment.
+In our opinion, reinforcement learning is the first field to seriously address the
+computational issues that arise when learning from interaction with an environment in
+order to achieve long-term goals.
+Reinforcement learning uses the formal framework of Markov decision processes to
+define the interaction between a learning agent and its environment in terms of states,
+actions, and rewards.
+This framework is intended to be a simple way of representing essential features of the
+artificial intelligence problem.
+These features include a sense of cause and effect, a sense of uncertainty and nondeterminism,
+and the existence of explicit goals.
+The concepts of value and value function are key to most of the reinforcement learning
+methods that we consider in this book.
+We take the position that value functions are important for efficient search in the space
+of policies.
+The use of value functions distinguishes reinforcement learning methods from evolutionary
+methods that search directly in policy space guided by evaluations of entire policies.
