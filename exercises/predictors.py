@@ -4,10 +4,11 @@ import numpy as np
 from pathlib import Path
 import matplotlib.pyplot as plt
 import heapq
-from utils import EpsilonGreedyPolicy, GreedyPolicy, FileIO
+
 
 script_path = Path(sys.argv[0])
 sys.path.append(os.fspath(script_path.parent.parent))
+from utils import EpsilonGreedyPolicy, GreedyPolicy, FileIO
 
 
 class BasePredictor:
@@ -100,7 +101,8 @@ class Sarsa(BasePredictor):
     def learn(self, state, action, next_state, r, terminal):
         super().learn(state, action, next_state, r, terminal)
         err = []
-        next_action = self._populate_buffer(state, action, next_state, r, terminal)
+        next_action = self._populate_buffer(
+            state, action, next_state, r, terminal)
 
         if self._step - 1 > self._n:
             next_SA = tuple(np.concatenate((next_state, [next_action])))
@@ -194,7 +196,7 @@ class PerDecisionOffPolicySarsa(OffPolicySarsa):
         return gain
 
     def _update(self, t, next_SA=None):
-        return super(OffPolicySarsa, self)._update(t, next_SA)
+        return super()._update(t, next_SA)
 
 
 class QLearning(BasePredictor):
@@ -303,6 +305,7 @@ class DoubleQLearning(BasePredictor):
 
 class DynaQ(QLearning):
     EXTENDER = 100
+
     def __init__(self, Q, actions, n, behavior_policy, alpha=0.5):
         super().__init__(Q, actions, behavior_policy, alpha)
         self._n = n
@@ -365,8 +368,9 @@ class DynaQPlus(DynaQ):
             batch = self._observed[indices]
         for sample in batch:
             SR = self._model[tuple(sample)]
-            r = SR[2] + self._kappa * np.sqrt(self._step - self._timers[tuple(sample)])
-            td_err, _ = super(DynaQ, self).learn(
+            r = SR[2] + self._kappa * \
+                np.sqrt(self._step - self._timers[tuple(sample)])
+            td_err, _ = super().learn(
                 (sample[0], sample[1]), sample[2],
                 (SR[0], SR[1]), r)
             self._timers[tuple(sample)] = self._step - 1
@@ -376,7 +380,7 @@ class DynaQPlus(DynaQ):
 
 class DynaQPrioritized(DynaQ):
     class Node:
-        def __init__ (self, p, s, a):
+        def __init__(self, p, s, a):
             self._p = p
             self.s = s
             self.a = a
@@ -389,7 +393,6 @@ class DynaQPrioritized(DynaQ):
         self._theta = theta
         self._heap = []
         heapq.heapify(self._heap)
-
 
     def _plan(self):
         td_error = 0
@@ -415,11 +418,10 @@ class DynaQPrioritized(DynaQ):
         return td_error, next_action
 
 
-
 class KBanditBase(object):
     def __init__(self, k, mean, scale):
         if scale < 0:
-            raise ValueError('scale must be > 0')
+            raise ValueError('scale must be >= 0')
         if k <= 0:
             raise ValueError('k must be > 0')
         self._q = np.random.normal(loc=mean, scale=scale, size=k)
@@ -437,48 +439,50 @@ class KBanditBase(object):
     def avg(self):
         return self.__sum / self.__n if self.__n else 0
 
-# e greedy
-class KBanditGreedy(KBanditBase):
+
+class IKBanditGreedy(KBanditBase):
+    """
+        Interface for the greedy action selecting predictor.
+    """
     def __init__(self, k, mean, scale, e):
-        KBanditBase.__init__(self, k , mean, scale)
+        super().__init__(k, mean, scale)
         if e < 0 or e >= 1:
             raise ValueError('e must be >= 0 and < 1')
         self.__e = e
 
-    def pick(self):
+    def pick(self, t=0):
         return np.argmax(self._q) \
             if np.random.rand() > self.__e \
             else np.random.randint(low=0, high=self._k)
 
-class KBanditGreedyInc(KBanditGreedy):
+
+class KBanditGreedyInc(IKBanditGreedy):
     def __init__(self, k, mean, scale, e):
-        KBanditGreedy.__init__(self, k, mean, scale, e)
+        super().__init__(k, mean, scale, e)
         self.__n = np.zeros(k)
 
     def update(self, a, r):
-        KBanditGreedy.update(self, r)
+        super().update(r)
+
+        self._q[a] += (r - self._q[a]) / (self.__n[a] if self.__n[a] else 1)
         self.__n[a] += 1
 
-        self._q[a] += 1 / self.__n[a] * (r - self._q[a]) \
-            if self.__n[a] != 0 else r - self._q[a]
-        self.__n[a] += 1
 
-
-class KBanditGreedyAlpha(KBanditGreedy):
+class KBanditGreedyAlpha(IKBanditGreedy):
     def __init__(self, k, mean, scale, e, alpha):
-        KBanditGreedy.__init__(self, k, mean, scale, e)
+        super().__init__(k, mean, scale, e)
         if alpha < 0 or alpha >= 1:
             raise ValueError('alpha must be >= 0 and < 1')
         self.__alpha = alpha
 
     def update(self, a, r):
-        KBanditGreedy.update(self, r)
+        super().update(r)
         self._q[a] += self.__alpha * (r - self._q[a])
 
 
 class KBanditGradient(KBanditBase):
     def __init__(self, k, mean, scale, alpha):
-        KBanditBase.__init__(self, k, mean, scale)
+        super().__init__(k, mean, scale)
         if alpha < 0 or alpha >= 1:
             raise ValueError('alpha must be >= 0 and < 1')
         self.__h = np.zeros(k)
@@ -487,11 +491,11 @@ class KBanditGradient(KBanditBase):
         self.__probs = np.ones(k) / k
         self.__alpha = alpha
 
-    def pick(self):
+    def pick(self, t=0):
         return np.argmax(self.__probs)
 
     def update(self, a, r):
-        KBanditGreedy.update(self, r)
+        super().update(r)
         self.__n += 1
         self.__avg_r += 1 / self.__n * (r - self.__avg_r)
 
@@ -504,9 +508,13 @@ class KBanditGradient(KBanditBase):
         self.__probs = np.exp(self.__h) / s
 
 
-class KBanditUCB(KBanditBase):
+class IKBanditUCB(KBanditBase):
+    """
+        Interface for the upper-confidence-bound (UCB)
+        action selecting predictor.
+    """
     def __init__(self, k, mean, scale, c):
-        KBanditBase.__init__(self, k, mean, scale)
+        super().__init__(k, mean, scale)
         if c < 0:
             raise ValueError('c must be >= 0')
         self.__c = c
@@ -520,24 +528,26 @@ class KBanditUCB(KBanditBase):
         q = self._q + self.__c * np.sqrt(np.log(t) / self._n)
         return np.argmax(q)
 
-class KBanditUCBInc(KBanditUCB):
+
+class KBanditUCBInc(IKBanditUCB):
     def __init__(self, k, mean, scale, c):
-        KBanditUCB.__init__(self, k, mean, scale, c)
+        super().__init__(k, mean, scale, c)
 
     def update(self, a, r):
-        KBanditGreedy.update(self, r)
+        super().update(r)
         self._n[a] += 1
         self._q[a] += 1 / self._n[a] * (r - self._q[a]) \
             if self._n[a] != 0 else r - self._q[a]
 
-class KBanditUCBAlpha(KBanditUCB):
+
+class KBanditUCBAlpha(IKBanditUCB):
     def __init__(self, k, mean, scale, c, alpha):
-        KBanditUCB.__init__(self, k, mean, scale, c)
+        super().__init__(k, mean, scale, c)
         if alpha < 0 or alpha >= 1:
             raise ValueError('alpha must be >= 0 and < 1')
         self.__alpha = alpha
 
     def update(self, a, r):
-        KBanditGreedy.update(self, r)
+        super().update(r)
         self._n[a] += 1
         self._q[a] += self.__alpha * (r - self._q[a])

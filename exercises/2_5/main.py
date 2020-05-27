@@ -1,9 +1,12 @@
 import matplotlib.pyplot as plt
 import numpy as np
+import os
+import sys
 
-from environments import KBanditNonStationary
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from predictors import KBanditGreedyInc, KBanditGreedyAlpha, KBanditUCBInc, \
     KBanditUCBAlpha, KBanditGradient
+from environments import KBanditNonStationary
 
 STEPS = 10000
 EPSILON = 0.1
@@ -23,9 +26,12 @@ predictors = [
 
 plt.ion()
 fig = plt.figure()
+fig.suptitle('Performance of different algorithms against the optimal value')
 ax = fig.add_subplot(111)
 ax.set_xlim([0, STEPS])
 ax.set_ylim([-3, 3])
+ax.set_xlabel('steps')
+ax.set_ylabel('reward')
 bandit_plotline, = ax.plot([], [], COLORS[0] + '-', label='optimal')
 plots = []
 for i in range(len(predictors)):
