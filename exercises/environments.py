@@ -253,9 +253,9 @@ class KBandit(object):
 
 
 class KBanditNonStationary(KBandit):
-    def __init__(self, k, mean=0, scale=1, update_scale=0.1):
+    def __init__(self, k, mean=0, scale=1, update_scale=0.01):
         KBandit.__init__(self, k, mean, scale)
         self.__update_scale = update_scale
 
     def update(self):
-        self._q += np.random.normal(scale=self.__update_scale)
+        self._q += np.random.normal(scale=self.__update_scale, size=len(self._q))
