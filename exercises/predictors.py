@@ -1,13 +1,11 @@
 import sys
 import os
 import numpy as np
-from pathlib import Path
 import matplotlib.pyplot as plt
 import heapq
 
-
-script_path = Path(sys.argv[0])
-sys.path.append(os.fspath(script_path.parent.parent))
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(os.path.dirname(SCRIPT_DIR))
 from utils import EpsilonGreedyPolicy, GreedyPolicy, FileIO
 
 

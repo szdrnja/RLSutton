@@ -33,6 +33,7 @@ class Color:
 
 class Visualizer:
     REFRESH_RATE = 10
+
     def __init__(self, m, color_scheme, caption='Visualizer',
                  line_color=(255, 255, 255), cell_size=5):
         self.__map = m
@@ -67,7 +68,7 @@ class Visualizer:
                 (self.__cell_size, self.__cell_size)), 1)
 
     def __reset_cell(self, cell):
-        cell_val = self.__map[cell]
+        cell_val = self.__map[tuple(cell)]
         color = self.__color_scheme[cell_val]
         self.__draw(cell, color)
 

@@ -198,7 +198,7 @@ class ChangingObstacleGridworld(ObstacleGridworld):
             self._map[ob] = ObstacleGridworld.OBSTACLE_VALUE
 
     def step(self, action):
-        _, r, terminal = super().step(state, action)
+        _, r, terminal = super().step(action)
         if self._obstacle_idx < len(self._change_times) and \
                 self._step > self._change_times[self._obstacle_idx]:
             self.change_obstacles()
